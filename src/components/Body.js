@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Dictionary from '../utils/Dictionary';
 import FaIcon from './FaIcon';
+import UserDisplay from './UserDisplay';
 
 export default class Body extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class Body extends Component {
     };
   }
 
-  handleWordChange({ key, target: { value } }) {
+  handleWordChange({ key, target: { value } }, input) {
     const {
       gameStarted,
       usedWords,
@@ -79,7 +80,7 @@ export default class Body extends Component {
         challengerWord,
         score: prevState.score + 1,
       }));
-      this.textInput.value = '';
+      input.value = '';
     }
   }
 
@@ -119,19 +120,12 @@ export default class Body extends Component {
         <hr />
         <div className="columns">
           <div className="column is-half is-offset-one-quarter">
-            <div className="field">
-              <div className="control">
-                <input
-                  className="input is-large"
-                  type="text"
-                  placeholder={gameStarted ? `${challengerWord.slice(-1)}...` : 'Enter a word to start the game.'}
-                  onKeyPress={this.handleWordChange}
-                  ref={input => { this.textInput = input; }}
-                />
-              </div>
-              {inputErrors.length && <p className="help is-danger">Word must be at least 4 letters.</p>}
-              {inputErrors.exists && <p className="help is-danger">Word is invalid.</p>}
-            </div>
+            <UserDisplay
+              errors={inputErrors}
+              gameStarted={gameStarted}
+              challengerWord={challengerWord}
+              onWordChange={this.handleWordChange}
+            />
           </div>
         </div>
         <div className="columns has-text-centered">
