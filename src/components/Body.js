@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ChallengerDisplay from './ChallengerDisplay';
 import Dictionary from '../utils/Dictionary';
 import FaIcon from './FaIcon';
 import UserDisplay from './UserDisplay';
@@ -101,20 +102,7 @@ export default class Body extends Component {
         </div>
         <div className="columns">
           <div className="column is-8 is-offset-2">
-            <div className="columns has-text-centered">
-              <div className="column">
-                <FaIcon icon="quote-left" size={3} />
-              </div>
-              <div className="column is-narrow">
-                <p className="is-size-1 is-inline">
-                  {gameStarted ? challengerWord.slice(0, -1) : 'Shiritori'}
-                  {challengerWord && <span className="has-text-weight-bold">{challengerWord.slice(-1)}</span>}
-                </p>
-              </div>
-              <div className="column">
-                <FaIcon icon="quote-right" size={3} />
-              </div>
-            </div>
+            <ChallengerDisplay gameStarted={gameStarted} challengerWord={challengerWord} />
           </div>
         </div>
         <hr />
