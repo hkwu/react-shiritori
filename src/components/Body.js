@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Dictionary from './Dictionary';
+import Dictionary from '../utils/Dictionary';
+import FaIcon from './FaIcon';
 
 export default class Body extends Component {
   constructor(props) {
@@ -87,14 +88,14 @@ export default class Body extends Component {
       <div className="container">
         <div className="columns has-text-centered">
           <div className="column">
-            <i className="fa fa-android fa-3x" />
+            <FaIcon icon="android" size={3} />
           </div>
         </div>
         <div className="columns">
           <div className="column is-8 is-offset-2">
             <div className="columns has-text-centered">
               <div className="column">
-                <i className="fa fa-quote-left fa-3x" />
+                <FaIcon icon="quote-left" size={3} />
               </div>
               <div className="column is-narrow">
                 <p className="is-size-1 is-inline">
@@ -109,7 +110,7 @@ export default class Body extends Component {
                 </p>
               </div>
               <div className="column">
-                <i className="fa fa-quote-right fa-3x" />
+                <FaIcon icon="quote-right" size={3} />
               </div>
             </div>
           </div>
@@ -134,7 +135,7 @@ export default class Body extends Component {
         </div>
         <div className="columns has-text-centered">
           <div className="column">
-            <i className="fa fa-user fa-3x" />
+            <FaIcon icon="user" size={3} />
           </div>
         </div>
         <div className="columns">
