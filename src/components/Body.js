@@ -28,61 +28,64 @@ export default class Body extends Component {
       usedWords,
     } = this.state;
 
-    if (key === 'Enter') {
-      if (!gameStarted) {
-        this.setState({
-          gameStarted: true,
-        });
-      }
-
-      const normalized = value.trim().toLowerCase();
-
-      if (normalized.length < 4) {
-        return this.setState({
-          inputErrors: {
-            length: true,
-          },
-        });
-      } else if (usedWords.has(normalized)) {
-        return this.setState({
-          inputErrors: {
-            exists: true,
-          },
-        });
-      }
-
-      const leadingChar = normalized.charAt(0);
-      const endingChar = normalized.slice(-1);
-
-      if (
-        (this.state.challengerWord && this.state.challengerWord.slice(-1) !== leadingChar) ||
-        (!Dictionary[leadingChar].some(word => word === normalized))
-      ) {
-        return this.setState({
-          inputErrors: {
-            exists: true,
-          },
-        });
-      }
-
-      let challengerWord;
-
-      do {
-        challengerWord = Dictionary[endingChar][Math.floor(Math.random() * Dictionary[endingChar].length)];
-      } while (usedWords.has(challengerWord));
-
-      usedWords.add(normalized);
-      usedWords.add(challengerWord);
-      this.setState(prevState => ({
-        inputErrors: {
-          length: false,
-          exists: false,
-        },
-        challengerWord,
-        score: prevState.score + 1,
-      }));
-      input.value = '';
+    if (key !== 'Enter') {
+      return;
     }
+
+    if (!gameStarted) {
+      this.setState({
+        gameStarted: true,
+      });
+    }
+
+    const normalized = value.trim().toLowerCase();
+
+    if (normalized.length < 4) {
+      return this.setState({
+        inputErrors: {
+          length: true,
+        },
+      });
+    } else if (usedWords.has(normalized)) {
+      return this.setState({
+        inputErrors: {
+          exists: true,
+        },
+      });
+    }
+
+    const leadingChar = normalized.charAt(0);
+    const endingChar = normalized.slice(-1);
+
+    if (
+      (this.state.challengerWord && this.state.challengerWord.slice(-1) !== leadingChar) ||
+      (!Dictionary[leadingChar].some(word => word === normalized))
+    ) {
+      return this.setState({
+        inputErrors: {
+          exists: true,
+        },
+      });
+    }
+
+    let challengerWord;
+
+    do {
+      const wordPool = Dictionary[endingChar];
+      challengerWord = wordPool[Math.floor(Math.random() * wordPool.length)];
+    } while (usedWords.has(challengerWord));
+
+    usedWords.add(normalized);
+    usedWords.add(challengerWord);
+    this.setState(prevState => ({
+      inputErrors: {
+        length: false,
+        exists: false,
+      },
+      challengerWord,
+      score: prevState.score + 1,
+    }));
+    input.value = '';
   }
 
   render() {

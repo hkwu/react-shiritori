@@ -17,7 +17,7 @@ export default class UserDisplay extends PureComponent {
             type="text"
             placeholder={gameStarted ? `${challengerWord.slice(-1)}...` : 'Enter a word to start the game.'}
             onKeyPress={e => onWordChange(e, this.textInput)}
-            ref={input => { this.textInput = input; }}
+            ref={(input) => { this.textInput = input; }}
           />
         </div>
         {errors.length && <p className="help is-danger">Word must be at least 4 letters.</p>}

@@ -10,7 +10,10 @@ export default function ChallengerDisplay({ gameStarted, challengerWord }) {
       <div className="column is-narrow">
         <p className="is-size-1 is-inline">
           {gameStarted ? challengerWord.slice(0, -1) : 'Shiritori'}
-          {challengerWord && <span className="has-text-weight-bold">{challengerWord.slice(-1)}</span>}
+          {
+            challengerWord &&
+            <span className="has-text-weight-bold">{challengerWord.slice(-1)}</span>
+          }
         </p>
       </div>
       <div className="column">
