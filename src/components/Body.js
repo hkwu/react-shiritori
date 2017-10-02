@@ -84,6 +84,13 @@ export default class Body extends Component {
   }
 
   render() {
+    const {
+      inputErrors,
+      gameStarted,
+      challengerWord,
+      usedWords,
+    } = this.state;
+
     return (
       <div className="container">
         <div className="columns has-text-centered">
@@ -99,14 +106,8 @@ export default class Body extends Component {
               </div>
               <div className="column is-narrow">
                 <p className="is-size-1 is-inline">
-                  {
-                    this.state.gameStarted
-                      ? this.state.challengerWord.slice(0, -1)
-                      : 'Shiritori'
-                  }
-                  {
-                    this.state.challengerWord && <span className="has-text-weight-bold">{this.state.challengerWord.slice(-1)}</span>
-                  }
+                  {gameStarted ? challengerWord.slice(0, -1) : 'Shiritori'}
+                  {challengerWord && <span className="has-text-weight-bold">{challengerWord.slice(-1)}</span>}
                 </p>
               </div>
               <div className="column">
@@ -123,13 +124,13 @@ export default class Body extends Component {
                 <input
                   className="input is-large"
                   type="text"
-                  placeholder={this.state.gameStarted ? `${this.state.challengerWord.slice(-1)}...` : 'Enter a word to start the game.'}
+                  placeholder={gameStarted ? `${challengerWord.slice(-1)}...` : 'Enter a word to start the game.'}
                   onKeyPress={this.handleWordChange}
                   ref={input => { this.textInput = input; }}
                 />
               </div>
-              {this.state.inputErrors.length && <p className="help is-danger">Word must be at least 4 letters.</p>}
-              {this.state.inputErrors.exists && <p className="help is-danger">Word is invalid.</p>}
+              {inputErrors.length && <p className="help is-danger">Word must be at least 4 letters.</p>}
+              {inputErrors.exists && <p className="help is-danger">Word is invalid.</p>}
             </div>
           </div>
         </div>
@@ -141,7 +142,7 @@ export default class Body extends Component {
         <div className="columns">
           <div className="column is-half is-offset-one-quarter">
             <p className="is-size-3">Used Words</p>
-            <p className="is-size-5">{[...this.state.usedWords].sort().join(', ')}</p>
+            <p className="is-size-5">{[...usedWords].sort().join(', ')}</p>
           </div>
         </div>
       </div>
