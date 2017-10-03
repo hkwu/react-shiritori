@@ -2,6 +2,7 @@
   "name": "shiritori",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://hkwu.github.io/react-shiritori",
   "dependencies": {
     "bulma": "^0.5.3",
     "classnames": "^2.2.5",
@@ -14,6 +15,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
@@ -21,6 +24,7 @@
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.4.0"
+    "eslint-plugin-react": "^7.4.0",
+    "gh-pages": "^1.0.0"
   }
 }
